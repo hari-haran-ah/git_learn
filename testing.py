@@ -362,4 +362,56 @@ n=input("Enter the String:")
 v,c = vowels_consonants(n)
 print(f"Vowels = {v}, Consonants = {c}")
 
+# even or odd
+def even_odd(n):
+  if n % 2 == 0:
+      return True
+  else:
+      return False
+      
+n = int(input("ENter the nUmber:"))
+if(even_odd(n)):
+    print(f" {n} is Even")
+else:
+    print(f"{n} is odd")
 
+# even or odd
+'''
+It is divisible by 4.
+But if it is divisible by 100, then it is NOT a leap year.
+Unless it is divisible by 400 → then it is a leap year.
+'''
+def leap_year(n):
+  if (n % 4 == 0 and n % 100 != 0) or  n % 400 == 0:
+      return "leap year"
+  else:
+      return "Not Leap Year"
+  
+n = int(input("ENter the nUmber:"))
+print(leap_year(n))
+
+def fibonacci_iterative(n):
+    a ,b = 0,1
+    for _ in range(n):
+        print(a,end=" ")
+        a,b = b,a+b
+num = int(input("Enter the number of terms: "))
+fibonacci_iterative(num)
+
+
+#armstrong numberx 
+def is_armstrong(num: int) -> bool:
+    digit = str(num)
+    power = len(digit)
+    total =0
+    
+    for d in digit:
+        total += int(d) ** power
+    return total == num
+
+
+num = int(input("Enter a number: "))
+if is_armstrong(num):
+    print(f"{num} is an Armstrong number")
+else:
+    print(f"{num} is NOT an Armstrong number")
