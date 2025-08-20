@@ -1,0 +1,3 @@
+Hello, World!
+This is Python file handling.
+Adding a new line.
