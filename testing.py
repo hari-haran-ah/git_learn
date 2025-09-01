@@ -197,7 +197,9 @@ print(reverse_int(n))
 
 #Common Elements in Two Lists
 def two_list(num1,num2):
-    return list(set(num1) & set(num2))
+   return sorted(list(set(num1) | set(num2)))
+   num1.extend(num2)
+   return num1
 
 list1 = list(map(int,input("Enter the list:").split()))
 list2 = list(map(int,input("Enter the list:").split()))
@@ -312,7 +314,7 @@ with open("sample.txt", "r") as f:
 
 def count_words_each_line(filename):
     with open(filename,"r") as f:
-        read_no =1
+        read_no = 1
         for line in f:
             words=line.split()
             print(f"Line {read_no}: {len(words)} words -> {words}")
@@ -415,3 +417,350 @@ if is_armstrong(num):
     print(f"{num} is an Armstrong number")
 else:
     print(f"{num} is NOT an Armstrong number")
+    
+    
+# strong NUmber
+
+def factoral(n):
+    fact =1
+    for i in range(1,n+1):
+        fact *=i
+    return fact
+def is_strong(num):
+    original = num
+    total =0
+    while num > 0:
+        digit = num % 10
+        total +=factoral(digit)
+        num//=10
+    return total == original
+
+n = int(input("Enter a number: "))
+if is_strong(n):
+    print(f"{n} is a Strong Number")
+else:
+    print(f"{n} is NOT a Strong Number")
+
+# Perfect Number Check
+
+def perfect_num(num):
+    if num <= 0:
+        return False
+    total = 0
+    for i in range(1,num):
+        if num % i == 0:
+            total += i
+    return num == total
+
+n = int(input("Enter a number: "))
+if perfect_num(n):
+    print(f"{n} is a Perfect Number")
+else:
+    print(f"{n} is NOT a Perfect Number")
+
+#decorators
+
+def decor_tor(func):
+    def wrapper(num,num1):
+        print("befor sum the number")
+        func(num,num1)
+        print("After the sum the number")
+    return wrapper
+@decor_tor
+def sum(num,num1):
+    print(num + num1)
+
+@decor_tor
+def minous(num,num1):
+    print(num - num1)
+
+
+sum(10,20)
+minous(10,10)
+
+# method overloading
+
+class hai:
+    def add(self,n1:int,n2:int):
+        print("First")
+        return n1 + n2
+    
+    def add(self,n1:int,n2: int=0):
+        print("Second")
+        return n1 - n2
+
+obj = hai()
+print(obj.add(10))
+print(obj.add(20,10))
+
+# method overloading
+
+class hai:
+    def add(self, n1:int, n2:int=None):
+        if n2 is None:
+            print("first")
+            return n1
+        else:
+            print("second")
+            return n1 +n2
+
+obj = hai()
+print(obj.add(10))
+print(obj.add(20,10))
+
+# method overloading
+class hai:
+    def add(self,*args):
+        if len(args) == 1:
+            print("first")
+            return args[0]
+        elif len(args) ==2:
+            print("second")
+            return args[0] + args[1]
+
+obj = hai()
+print(obj.add(10))
+print(obj.add(20,10))
+
+
+#methos overriding
+class Mathoperation:
+    def add(self,n:int,n2 :int):
+        return n + n2
+    
+class Mathfunction(Mathoperation):
+    def add(self,n:int,n2 :int):
+        return n - n2
+    
+obj = Mathfunction()
+print(obj.add(10,20))
+    
+    
+class prime_check:
+    
+    def __init__(self,number):
+        self.number = number
+        
+    def check_primme(self):
+        n = self.number
+        if n <= 1:
+            return False
+        for i in range(2,int(n ** 0.5 +1)):
+            if n % i == 0:
+                return False
+        return True
+    
+    def display(self):
+        prime = self.check_primme()
+        if prime:
+            print(f"{self.number} this number is prime")
+        else:
+            print(f"{self.number} this number is not prime")
+
+
+num = int(input("Enter the Value:"))
+prime = prime_check(num)
+prime.display()
+
+
+
+def Genarator():
+    yield "hello gen"
+    print("After yield")
+    yield "hello after"
+
+second = Genarator()
+print(next(second))
+print(next(second))
+     
+
+
+# encapulation
+class RepeatTest:
+    def __init__(self,name,password):
+        self.name = name
+        self.__password = password
+    
+    #getter
+    def get_name(self):
+        return self.name
+    
+    def get_password(self):
+        return self.__password
+    
+    #setter
+    
+    def set_name(self,name):
+        self.name = name
+    
+    def set_password(self,password):
+        self.__password = password
+    
+    
+obj = RepeatTest("Hari","****")
+print(obj.get_name())
+print(obj.get_password())
+obj.set_name("Hariharan A")
+obj.set_password("*******")
+print(obj.get_name())
+print(obj.get_password())
+
+
+#abstract
+
+from abc import ABC , abstractmethod
+
+class car(ABC):
+    
+    @abstractmethod
+    def car_name(self):
+        print("default")
+        pass
+    
+    @abstractmethod
+    def car_model(self):
+        pass
+
+class susuzi(car):
+    def __init__(self,carname,carmodel):
+        self.carname = carname
+        self.carmodel = carmodel
+    def car_name(self):
+        return self.carname
+    def car_model(self):
+        return self.carmodel
+
+obj = susuzi("susuzi","y21")
+print(obj.car_name())
+print(obj.car_model())
+
+
+# polymorphism
+
+# compile time polymorphism
+
+def add(*args):
+    result = 0
+    for i in (args):
+        result += i
+    return result
+
+
+print(add(2,34,45,56,6,67,78,8))
+
+def add(a,b=0):
+    return a+b
+try:
+    print(add(10))
+    print(add(10,20))
+    print(add(10,20,30))
+except: StopIteration
+print("To more inputs")
+
+#run time polymorphism
+class plus:
+    def add(self,a,b):
+        return a+b
+    def minuss(self,a,b):
+        return a-b
+class minus(plus):
+    def add(self,a,b):
+        return a+b
+
+obj = minus()
+print(obj.add(10,5))
+print(obj.add(10,5))
+print(obj.minuss(10,5))
+
+
+#inheritance
+# single level inheritance
+class Parent:
+    def parent_method(self):
+        return "This is parent method"
+class Child(Parent):
+    def child_method(self):
+        return "This is child method"
+obj = Child()
+print(obj.parent_method())
+print(obj.child_method())
+
+
+#multi level inheritance
+class GrandParent:
+    def grandparent_method(self):
+        return "This is grandparent method"
+class Parent(GrandParent):
+    def parent_method(self):
+        return "This is parent method"
+class Child(Parent):
+    def child_method(self):
+        return "This is child method"
+obj = Child()
+print(obj.parent_method())
+print(obj.child_method())
+print(obj.grandparent_method())
+
+
+#heriacical
+class Parent:
+    def parent_method(self):
+        return "This is parent method"
+class Child1(Parent):
+    def child1_method(self):
+        return "This is child1 method"
+class Child2(Parent):
+    def child2_method(self):
+        return "This is child2 method"
+obj1 = Child1()
+obj2 = Child2()
+print(obj1.parent_method())
+print(obj2.parent_method())
+print(obj2.child2_method())
+
+
+# multiple inheritance
+class Father:
+    def father_method(self):
+        return "This is father method"
+class Mother:
+    def mother_method(self):
+        return "This is mother method"
+class Child(Father,Mother):
+    def child_method(self):
+        return "This is child method"
+obj = Child()
+print(obj.father_method())
+print(obj.mother_method())
+print(obj.child_method())
+def number(num):
+    
+    for i in range(1,num+1):
+        if i % 3 == 0 and i % 5 == 0:
+            print("FizzBuzz")
+        elif i % 3 == 0:
+            print("Fizz")
+        elif i % 5 == 0:
+            print("Buzz")
+        else:
+            print(i)
+
+num = int(input("Enter the number:"))
+number(num)
+
+
+# First Non-Repeating Character
+def word_count(str1):
+    freq ={}
+    words = str1.lower()
+    for word in words:
+        if word in freq:
+            freq[word] +=1
+        else:
+            freq[word] = 1
+    for word in words:
+        if freq[word] == 1:
+            return word
+    return None
+string = input("Enter the string:")
+print(word_count(string))
