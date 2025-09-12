@@ -761,6 +761,90 @@ def word_count(str1):
     for word in words:
         if freq[word] == 1:
             return word
+        
     return None
 string = input("Enter the string:")
 print(word_count(string))
+
+
+import datetime
+
+# 1. Get current date & time
+now = datetime.datetime.now()
+print("Current Date & Time:", now)
+
+# 2. Get only date
+today = datetime.date.today()
+print("Today:", today)
+
+# 3. Formatting date
+formatted = now.strftime("%d-%m-%Y %H:%M:%S")
+print("Formatted:", formatted)
+
+# 4. Create custom date
+custom_date = datetime.date(2025, 9, 6)
+print("Custom Date:", custom_date)
+
+# 5. Difference between dates
+future = datetime.date(2025, 12, 31)
+delta = future - today
+print("Days until 2025 ends:", delta.days)
+
+now = datetime.date(2025 ,12 ,6)
+delta = now - today
+print(delta.days)
+
+def common_divisor(num1 , num2):
+    if num1 and num2 == 0:
+        return "GCD not possible"
+    while num2 !=0:
+        num1,num2 = num2,num1 % num2
+    return num1
+n1 = int(input("Enter the First Number:"))
+n2 = int(input("Enter the Second Number:"))
+print(f"The GCD of {n1} and {n2} is {common_divisor(n1,n2)}")
+
+
+# list comprehension
+even_odd = ["Even" if i % 2 == 0  else "odd" for i in range(6)]
+print(even_odd)
+
+# Nested list comprehension
+matrix = [(i,j) for i in range(3) for j in range(3)]
+print(matrix)
+
+even_odd = lambda x:"Even" if x %2 == 0 else "Odd"
+print(list(map(even_odd, range(6))))
+
+# Using filter with lambda
+even_numbers = list(filter(lambda x: x % 2 == 0, range(10)))
+print(even_numbers)
+
+nums = [10, 15, 20, 25, 30]
+evens = list(filter(lambda x: x % 2 == 0, nums))
+print(evens)
+
+
+f = lambda x: x + 1
+print(f.__name__)
+
+#map
+result = list(map(lambda x: x * 2, range(0,6+1,2)))
+print(result)
+
+#filter
+result = list(filter(lambda x:x % 2==0,range(9+1+2) ))
+print(result)
+
+import turtle
+
+t = turtle.Turtle()
+
+# A circle is just many tiny forward + turn movements
+for i in range(10):       # 360 small steps
+    t.forward(100)           # move a little forward
+    t.right(1000) # turn a little
+
+turtle.done()
+
+
