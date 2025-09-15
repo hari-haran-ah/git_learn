@@ -880,3 +880,76 @@ target = input("Enter the Substring:")
 result,count = count_sub(string,target)
 print(f"the string are :{result}")
 print(f"count are :{count}")
+
+def sum_of_list(nums):
+    total = 0
+    for i in nums:
+        total += i
+    return total
+
+def missing_number(num,n):
+        expected = n * (n+1) // 2
+        actual = sum_of_list(num)
+        return expected - actual  
+          
+num = list(map(int,input("Enter the number").split()))
+max_list = num[0]
+for i in num:
+    if i > max_list:
+        max_list = i
+n = max_list
+    
+print(missing_number(num,n))
+
+
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+element = matrix[1-1][2] # Row 1, Column 2 -> 6
+print(f"Element at [0][2] is: {element}")
+
+# Iterating through the matrix
+for row in matrix:
+    print(row)
+    
+class Stack:
+  def __init__(self):
+    self.stack = []
+
+  def push(self, element):
+    self.stack.append(element)
+
+  def pop(self):
+    if self.isEmpty():
+      return "Stack is empty"
+    return self.stack.pop()
+
+  def peek(self):
+    if self.isEmpty():
+      return "Stack is empty"
+    return self.stack[-1]
+
+  def isEmpty(self):
+    return len(self.stack) == 0
+
+  def size(self):
+    return len(self.stack)
+
+# Create a stack
+myStack = Stack()
+
+myStack.push('A')
+myStack.push('B')
+myStack.push('C')
+
+print("Stack: ", myStack.stack)
+print("Pop: ", myStack.pop())
+print("Stack after Pop: ", myStack.stack)
+print("Peek: ", myStack.peek())
+print("isEmpty: ", myStack.isEmpty())
+print("Size: ", myStack.size())
+
+

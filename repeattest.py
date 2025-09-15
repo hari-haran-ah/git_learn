@@ -1,32 +1,36 @@
-# product of three number
-def sum_product(nums,target):
-    n = len(nums)
-    result =[]
-    count = 0
-    for i in range(n):
-        for j in range(i+1,n):
-            for k in range(j+1,n):
-                if nums[i] * nums[j] * nums[k] == target:
-                    result.append((nums[i],nums[j],nums[k]))
-                    count +=1
-    return result,count
-nums = list(map(int,input("Enter the Value:").split()))
-target =int( input("Enter the target Number: "))
-result,count = sum_product(nums,target)
-print(f" combination are :{result}")
-print(f"the count of combination :{count}")
 
-# count substring
-def count_sub(string,target):
-    total = []
-    count = 0
-    for i in range(len(string) - len(target) + 1):
-        if string[i:i+len(target)] == target:
-            total.append(string[i:i+len(target)])
-            count += 1
-    return total ,count
-string = input("Enter the String:")
-target = input("Enter the Substring:")
-result,count = count_sub(string,target)
-print(f"the string are :{result}")
-print(f"count are :{count}")
+def sum_of_list(nums):
+    total = 0
+    for i in nums:
+        total += i
+    return total
+
+
+def missing_number(num,n):
+        expected = n * (n+1) // 2
+        actual = sum_of_list(num)
+        return expected - actual  
+          
+num = list(map(int,input("Enter the number").split()))
+max_list = num[0]
+for i in num:
+    if i > max_list:
+        max_list = i
+n = max_list
+    
+print(missing_number(num,n))
+
+
+def find_missing_number_sort(nums, n):
+    nums.sort()
+    for i in range(1,n +1):
+        if i not in nums:
+            return i
+    return None
+num = list(map(int,input("Enter the number").split()))
+max_list = num[0]
+for i in num:
+    if i > max_list:
+        max_list = i
+n = max_list
+print(find_missing_number_sort(num,n))
