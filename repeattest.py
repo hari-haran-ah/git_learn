@@ -5,10 +5,19 @@ def sum_of_list(nums):
         total += i
     return total
 
+def remove_duplication(num):
+    return_list =[]
+    for i in num:
+        if i not in return_list:
+            return_list.append(i)
+    return return_list
+
 
 def missing_number(num,n):
         expected = n * (n+1) // 2
-        actual = sum_of_list(num)
+        actual1 = remove_duplication(num)
+        actual = sum_of_list(actual1)
+ 
         return expected - actual  
           
 num = list(map(int,input("Enter the number").split()))
@@ -34,3 +43,5 @@ for i in num:
         max_list = i
 n = max_list
 print(find_missing_number_sort(num,n))
+
+
