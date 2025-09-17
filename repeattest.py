@@ -1,47 +1,24 @@
-
-def sum_of_list(nums):
-    total = 0
-    for i in nums:
-        total += i
-    return total
-
-def remove_duplication(num):
-    return_list =[]
-    for i in num:
-        if i not in return_list:
-            return_list.append(i)
-    return return_list
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
 
 
-def missing_number(num,n):
-        expected = n * (n+1) // 2
-        actual1 = remove_duplication(num)
-        actual = sum_of_list(actual1)
- 
-        return expected - actual  
-          
-num = list(map(int,input("Enter the number").split()))
-max_list = num[0]
-for i in num:
-    if i > max_list:
-        max_list = i
-n = max_list
+num_rows = len(matrix)
+num_cols = len(matrix[0])
+print(f"Matrix has {num_rows} rows and {num_cols} columns.\n")
+
+even_count = 0
+even_numbers_found = []
+for i in range(num_rows):
+    for j in range(num_cols):
+        element = matrix[i][j]
+        if element % 2 == 0:
+            even_count += 1
+            even_numbers_found.append(element)
+            print(f"Even number found: {element} at position ({i}, {j})")
+            
+print(f"\nTotal even numbers found: {even_count}")
+print(f"The even numbers are: {even_numbers_found}")
     
-print(missing_number(num,n))
-
-
-def find_missing_number_sort(nums, n):
-    nums.sort()
-    for i in range(1,n +1):
-        if i not in nums:
-            return i
-    return None
-num = list(map(int,input("Enter the number").split()))
-max_list = num[0]
-for i in num:
-    if i > max_list:
-        max_list = i
-n = max_list
-print(find_missing_number_sort(num,n))
-
-

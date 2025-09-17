@@ -1,4 +1,5 @@
 #anagram
+
 def ana_gram(str1,str2):
     str1 = str1.replace(" ","").lower()
     str2 = str2.replace(" ","").lower()
@@ -951,5 +952,69 @@ print("Stack after Pop: ", myStack.stack)
 print("Peek: ", myStack.peek())
 print("isEmpty: ", myStack.isEmpty())
 print("Size: ", myStack.size())
+#even in the matrix
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
 
 
+num_rows = len(matrix)
+num_cols = len(matrix[0])
+print(f"Matrix has {num_rows} rows and {num_cols} columns.\n")
+
+even_count = 0
+even_numbers_found = []
+for i in range(num_rows):
+    for j in range(num_cols):
+        element = matrix[i][j]
+        if element % 2 == 0:
+            even_count += 1
+            even_numbers_found.append(element)
+            print(f"Even number found: {element} at position ({i}, {j})")
+            
+print(f"\nTotal even numbers found: {even_count}")
+print(f"The even numbers are: {even_numbers_found}")
+
+from typing import List
+class Solution:
+    def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
+        nums1.extend(nums2)
+        nums1.sort()
+        
+        n= len(nums1)
+        if n % 2 == 1:
+            return float(nums1[n // 2])
+        else:
+            mid1 = nums1[n // 2 - 1]
+            mid2 = nums1[n // 2]
+            return (mid1 + mid2) / 2.0
+
+
+class Solution:
+    def maxArea(self, height: List[int]) -> int:
+        left = 0
+        right = len(height) -1
+        max_area = 0
+        while left < right:
+            width = right - left
+            h = min(height[left],height[right])
+            max_area= max(max_area, width * h)
+
+            if height[left] < height[right]:
+                left +=1
+            else:
+                right -=1
+        return max_area
+
+class Solution:
+    def removeDuplicates(self, nums: List[int]) -> int:
+        if not nums:
+            return 0
+        left = 0
+        for right in range(1, len(nums)):
+            if nums[left] != nums[right]:
+                left += 1
+                nums[left] = nums[right]
+        return left + 1
