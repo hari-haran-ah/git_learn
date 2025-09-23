@@ -1018,3 +1018,361 @@ class Solution:
                 left += 1
                 nums[left] = nums[right]
         return left + 1
+
+
+
+# class  in oop
+class Car:
+    def __init__(self,make, model, year, color):
+        print(f"Creating a {color} {year} {make} {model}...")
+        self.make = make
+        self.model = model
+        self.year = year
+        self.color =color
+        self.is_engine_on = False
+        self.speed = 0
+        
+    def start_Engine(self):
+        if not self.is_engine_on:
+            self.is_engine_on = True
+            print(f"The {self.model}'s engine is now on. Vroom!")
+        else:
+            print("The engine is already running.")
+        
+    def accelerate(self, amount):
+        if self.is_engine_on:
+            self.speed += amount
+            print(f"Accelerating. The car is now moving at {self.speed} km/h.")
+        else:
+            print("You need to start the engine first!")
+             
+    def get_description(self):
+        return f"This is a {self.color} {self.year} {self.make} {self.model}."
+    
+
+
+my_car = Car("Toyota", "Camry", 2021, "Blue")
+your_car = Car("Honda", "Civic", 2022, "Red")
+
+
+print(f"My car is a {my_car.make}.")
+print(f"Your car is a {your_car.color} {your_car.model}.")
+
+print("-" * 20)
+my_car.start_Engine()
+your_car.start_Engine() 
+
+print("-" * 20)
+
+my_car.accelerate(50)
+your_car.accelerate(30)
+
+print("-" * 20)
+
+print(f"My car's speed: {my_car.speed} km/h")   # Output: My car's speed: 50 km/h
+print(f"Your car's speed: {your_car.speed} km/h") # Output: Your car's speed: 30 km/h
+
+print("-" * 20)
+
+
+print(my_car.get_description())
+print(your_car.get_description())
+
+
+#A Real-World Example: The BankAccount 🏦
+
+class BankAccount:
+    
+    def __init__(self,account_holder, initial_balance):
+        self.account_holder = account_holder
+        self.__balance = initial_balance
+    
+    def deposit(self,amount):
+        if amount > 0:
+            self.__balance +=amount
+            print(f"Deposited ${amount}. New balance is ${self.__balance}.")
+        else:
+            print("Deposit amount must be positive.")
+    
+    def withdraw(self,amount):
+        if amount > self.__balance:
+            print("Insufficient funds.")
+        elif amount <= 0:
+            print("Withdrawal amount must be positive.")
+        else:
+            self.__balance -= amount
+            print(f"Withdrew ${amount}. New balance is ${self.__balance}.")
+    def get_balance(self):
+        print(f"The current balance for {self.account_holder} is ${self.__balance}.")
+        return self.__balance
+
+my_account = BankAccount("John Doe", 1000)
+
+
+my_account.get_balance()
+my_account.deposit(1000)
+my_account.withdraw(2000)
+my_account.get_balance()
+my_account.deposit(-50)
+my_account.withdraw(5000)
+
+print("\n--- The WRONG way (trying to bypass encapsulation) ---")
+try:
+    my_account.__balace = 500000
+    print("Balance was changed directly!")
+    print(my_account.account_holder)
+except AttributeError  as e:
+    print(f"Failed to access private attribute: {e}")
+print("\nFinal balance check:")
+my_account.get_balance()
+            
+#abstraction
+
+from abc import ABC,abstractmethod
+import math
+class Shape(ABC):
+    def __init__(self,name):
+        self.name = name
+    @abstractmethod
+    def area(self):
+        pass
+    def who_am_i(self):
+        print(f"I am a {self.name}.")
+    
+class reactangle(Shape):
+    def __init__(self, name,length,width):
+        super().__init__(name)
+        self.length = length
+        self.width = width
+    
+    def area(self):
+        return self.length * self.width
+
+class Circle(Shape):
+    def __init__(self,name,radius):
+        super().__init__(name)
+        self.radius = radius
+    
+    def area(self):
+        return math.pi * (self.radius ** 2 )
+
+my_rect = reactangle("Ractangle",5,5)
+my_circle = Circle("Circle",5)
+
+my_rect.who_am_i()
+print(f"Area of rectangle is :{my_rect.area()}")
+
+my_circle.who_am_i()
+print(f"Area of Circle is :{my_circle.area() :.2f}")
+
+
+class Dog:
+    def speak(self):
+        return "Woof! Woof!"
+
+class Cat:
+    def speak(self):
+        return "Meow..."
+
+# Let's add another class that is completely unrelated to Animals
+class Car:
+    def speak(self):
+        return "Honk! Honk!"
+
+# --- The Polymorphic Part ---
+
+# This function doesn't know or care what type of object it gets.
+# It only cares that the object has a .speak() method.
+def make_it_speak(thing):
+    print(thing.speak())
+
+
+# Create different objects from different classes
+dog = Dog()
+cat = Cat()
+car = Car()
+
+# Call the same function with different types of objects
+print("Calling the function with a Dog object:")
+make_it_speak(dog)
+
+print("\nCalling the function with a Cat object:")
+make_it_speak(cat)
+
+print("\nCalling the function with a Car object:")
+make_it_speak(car)
+
+
+class Car:
+    total_cars_made = 0 # This is a class attribute
+
+    def __init__(self, make, model):
+        self.make = make    # Instance attribute
+        self.model = model  # Instance attribute
+        Car.total_cars_made += 1
+
+    # An instance method: works with a specific car instance (self)
+    def display_info(self):
+        print(f"This is a {self.make} {self.model}.")
+
+    # A class method: works with the class itself (cls)
+    @classmethod
+    def get_total_cars_made(cls):
+        print(f"Total cars made by this factory: {cls.total_cars_made}.")
+
+    # A static method: a related utility function, doesn't use self or cls
+    @staticmethod
+    def is_valid_vin(vin_number):
+        return len(vin_number) == 17
+
+# --- Usage ---
+car1 = Car("Toyota", "Camry")
+car2 = Car("Honda", "Civic")
+
+car1.display_info() # Calling an instance method
+Car.get_total_cars_made() # Calling a class method
+
+# Calling a static method
+print(f"Is VIN '123' valid? {Car.is_valid_vin('123')}")
+print(f"Is VIN '12345678901234567' valid? {Car.is_valid_vin('12345678901234567')}")
+
+
+class Book:
+    def __init__(self, title, author, pages):
+        self.title = title
+        self.author = author
+        self.pages = pages
+
+    # The __str__ method is called by print() and str()
+    # It should return a user-friendly string.
+    def __str__(self):
+        return f"'{self.title}' by {self.author}"
+
+    # The __len__ method is called by len()
+    def __len__(self):
+        return self.pages
+
+    # The __add__ method is called by the + operator
+    def __add__(self, other_book):
+        # Let's say adding two books creates a "Book Series"
+        return f"Book Series: [{self.title}, {other_book.title}]"
+
+# --- Usage ---
+book1 = Book("The Hobbit", "J.R.R. Tolkien", 310)
+book2 = Book("The Lord of the Rings", "J.R.R. Tolkien", 1178)
+
+# 1. Using __str__
+print("--- Using print() on the object ---")
+print(book1) # Python secretly calls book1.__str__()
+
+# 2. Using __len__
+print("\n--- Using len() on the object ---")
+print(f"The book has {len(book1)} pages.") # Python calls book1.__len__()
+
+# 3. Using __add__
+print("\n--- Using the + operator on objects ---")
+series = book1 + book2 # Python calls book1.__add__(book2)
+print(series)
+
+from abc import ABC, abstractmethod
+
+# Pillar 1: Abstraction (The Payment "Contract") & Pillar 2: Inheritance
+# ----------------------------------------------------------------------
+class PaymentProcessor(ABC):
+    """ABSTRACT BASE CLASS: Defines the contract for all payment methods."""
+    @abstractmethod
+    def pay(self, amount):
+        pass
+
+class CreditCardProcessor(PaymentProcessor):
+    """A concrete class that inherits from the abstract one."""
+    def pay(self, amount):
+        print(f"Processing ${amount} payment via Credit Card...")
+        # Add logic for credit card transaction
+        return True
+
+class UPIProcessor(PaymentProcessor):
+    """Another concrete class for a different payment type."""
+    def pay(self, amount):
+        print(f"Processing ${amount} payment via UPI...")
+        # Add logic for UPI transaction
+        return True
+
+# Pillar 2: Inheritance (Product Hierarchy) & Pillar 3: Encapsulation
+# --------------------------------------------------------------------
+class Product:
+    """PARENT CLASS: A general product."""
+    def __init__(self, name, price):
+        self.name = name
+        self.__price = price  # ENCAPSULATION: Price is private
+
+    def get_price(self):
+        """A 'getter' provides safe, read-only access."""
+        return self.__price
+
+    def set_price(self, new_price):
+        """A 'setter' allows controlled modification."""
+        if new_price > 0:
+            self.__price = new_price
+        else:
+            print("Price must be positive.")
+
+class Book(Product):
+    """CHILD CLASS: Inherits from Product."""
+    def __init__(self, name, price, author):
+        super().__init__(name, price) # Call parent constructor
+        self.author = author
+
+class ElectronicDevice(Product):
+    """CHILD CLASS: Inherits from Product."""
+    def __init__(self, name, price, warranty_period):
+        super().__init__(name, price)
+        self.warranty_period = warranty_period
+
+# Pillar 4: Classes/Objects and Pillar 5: Polymorphism
+# -----------------------------------------------------
+class Order:
+    """This class brings everything together."""
+    def __init__(self, user, cart, payment_processor):
+        self.user = user
+        self.cart = cart # A list of Product objects
+        self.payment_processor = payment_processor # A PaymentProcessor object
+
+    def calculate_total(self):
+        return sum(item.get_price() for item in self.cart)
+
+    def process_order(self):
+        """POLYMORPHISM in action!"""
+        total = self.calculate_total()
+        print(f"Processing order for {self.user} with a total of ${total}.")
+        
+        # This one line works with ANY object that follows the PaymentProcessor contract.
+        # It doesn't care if it's a CreditCardProcessor or UPIProcessor.
+        self.payment_processor.pay(total)
+        print("Order processed successfully!")
+
+# --- Let's run the system! ---
+
+# 1. Create some products (Objects)
+book = Book("The Lord of the Rings", 25, "J.R.R. Tolkien")
+laptop = ElectronicDevice("Dell XPS 15", 1500, "2 years")
+
+# 2. Define the shopping cart and user
+current_user = "John Doe"
+shopping_cart = [book, laptop]
+
+# 3. Choose a payment method
+credit_card_payment = CreditCardProcessor()
+upi_payment = UPIProcessor()
+
+# 4. Create and process an order with a Credit Card
+print("--- Scenario 1: Paying with Credit Card ---")
+order1 = Order(current_user, shopping_cart, credit_card_payment)
+order1.process_order()
+
+print("\n" + "="*40 + "\n")
+
+# 5. Create and process the same order with UPI
+print("--- Scenario 2: Paying with UPI ---")
+order2 = Order(current_user, shopping_cart, upi_payment)
+order2.process_order()
