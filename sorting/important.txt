@@ -1,0 +1,24 @@
+Algorithm	Best Case Time	Average Case Time	Worst Case Time	Space Complexity	
+Bubble Sort	    O(n)    O(n2)	O(n2)	O(1)	
+Selection Sort	O(n2)	O(n2)	O(n2)	O(1)	
+Insertion Sort	O(n)	O(n2)	O(n2)	O(1)	
+
+
+Algorithm         Best Case Time    Average Case Time   Worst Case Time     Space Complexity
+================================================================================================
+Bubble Sort       O(n)              O(n^2)              O(n^2)              O(1)
+Selection Sort    O(n^2)            O(n^2)              O(n^2)              O(1)
+Insertion Sort    O(n)              O(n^2)              O(n^2)              O(1)
+
+
+Algorithm        | Best Case    | Average Case  | Worst Case   | Space        | Stable
+-----------------|--------------|---------------|--------------|--------------|--------
+Bubble Sort      | O(n)         | O(n^2)        | O(n^2)       | O(1)         | Yes
+Selection Sort   | O(n^2)       | O(n^2)        | O(n^2)       | O(1)         | No
+Insertion Sort   | O(n)         | O(n^2)        | O(n^2)       | O(1)         | Yes
+Merge Sort       | O(n log n)   | O(n log n)    | O(n log n)   | O(n)         | Yes
+Quick Sort       | O(n log n)   | O(n log n)    | O(n^2)       | O(log n)     | No
+Heap Sort        | O(n log n)   | O(n log n)    | O(n log n)   | O(1)         | No
+Timsort          | O(n)         | O(n log n)    | O(n log n)   | O(n)         | Yes
+Counting Sort    | O(n + k)     | O(n + k)      | O(n + k)     | O(n + k)     | Yes
+Radix Sort       | O(d(n+k))    | O(d(n+k))     | O(d(n+k))    | O(n + k)     | Yes
