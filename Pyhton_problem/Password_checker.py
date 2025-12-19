@@ -17,37 +17,49 @@ result = password_checker(password)
 print(result)
 
 
-def password_checker_2_point_0(password):
+def passwordChecker(password):
     score = 0
-    feedback = []
-    if len(password) >= 8:
+    positive_feedback = []
+    negative_feedback = []
+    if(len(password) >= 8):
         score += 1
+        positive_feedback.append("Password length is valid")
     else:
-        feedback.append("Password should be at least 8 characters long")
+        negative_feedback.append("Password length is not valid")
     if any(char.isdigit() for char in password):
         score += 1
+        positive_feedback.append("Password contains at least one digit")
     else:
-        feedback.append("Password should contain at least one digit")
+        negative_feedback.append("Password does not contain any digit")
     if any(char.isupper() for char in password):
         score += 1
+        positive_feedback.append("Password contains at least one uppercase letter")
     else:
-        feedback.append("Password should contain at least one uppercase letter")
+        negative_feedback.append("Password does not contain any uppercase letter")
     if any(char.islower() for char in password):
         score += 1
+        positive_feedback.append("Password contains at least one lowercase letter")
     else:
-        feedback.append("Password should contain at least one lowercase letter")
-    if any(char in '@#$%^&*()!=_-'  for char in password):
+        negative_feedback.append("Password does not contain any lowercase letter")
+    if any(char in '@#$%^&*()!=_-' for char in password):
         score += 1
+        positive_feedback.append("Password contains at least one special character")
     else:
-        feedback.append("Password should contain at least one special character (@#$%^&*()!=_-)")
-    return score,feedback
-password = input("Enter your password: ")
-score,feedback = password_checker_2_point_0(password)
-print(f"Password score: {score}/5")
-if feedback:
-    print("Suggestions to improve your password")
-    for ch in feedback:
-        print(f"- {ch}")
-else:
-    print(f"Your password {password} is strong!")        
-
+        negative_feedback.append("Password does not contain any special character")
+    return score,positive_feedback,negative_feedback
+password = input("Enter the Password:")
+score,positive_feedback,negative_feedback = passwordChecker(password)
+print("Password Strength:")
+print("----------------")
+print(f"Score:{score}/5")
+print("----------------")
+if positive_feedback:
+    print("Positive Feedback:")
+    for i in positive_feedback:
+        print(f"- {i}")
+    print("----------------")
+if negative_feedback:
+    print("Negative Feedback:")
+    for i in negative_feedback:
+        print(f"- {i}")
+    print("----------------")
